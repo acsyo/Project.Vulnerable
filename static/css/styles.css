@@ -29,6 +29,18 @@ header h1 {
     font-size: 1.5rem;
 }
 
+.container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    margin-top: 100px;
+    color: #333;
+}
+
 h1 {
     margin-bottom: 20px;
     color: #0066cc;
@@ -58,6 +70,16 @@ button:hover, a.btn:hover {
     transform: scale(1.05);
 }
 
+/* Form styles */
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
 
 .form-group {
     margin-bottom: 15px;
@@ -105,52 +127,51 @@ input {
     border: 1px solid #c3e6cb;
 }
 
-
-
-
-/* Add responsiveness to the table */
-/* Updated form-container */
-.form-container {
+.customer-list-container {
     background: white;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Ensures responsiveness */
-    max-width: 1200px; /* Allow for larger tables */
-    margin: 20px auto; /* Centered with vertical spacing */
-    overflow: hidden; /* Prevents content from escaping */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    max-width: 900px; /* Bigger width only for customer list */
+    margin: 70px auto 20px auto; /* Reduce top margin so it aligns */
+    color: #333;
 }
 
-/* Updated table-container */
-.table-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    margin: 0; /* No extra margin inside the container */
-    width: 100%; /* Ensure the table fits the container */
+
+.button-container {
+    text-align: center; /* Center the content */
+    margin-top: 20px;
 }
 
-/* Updated table styling */
-table {
-    width: 100%; /* Table spans full width of container */
-    border-collapse: collapse; /* Cleaner table borders */
-    font-size: 16px; /* Readable font size */
+.button-container .btn {
+    display: block; /* Make the button a block element */
+    margin: 0 auto; /* Ensure it stays centered */
+    width: 200px; /* Make the button a reasonable width */
+}
+
+
+.btn-secondary:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ Customer List Styling (No Table) */
+.customer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     text-align: left;
 }
 
-table th, table td {
-    border: 1px solid #ddd; /* Add border to cells */
-    padding: 10px; /* Increase padding for readability */
-    word-break: break-word; /* Break long text to prevent overflow */
+.customer-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #007bff;
 }
 
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tr:hover {
-    background-color: #f1f1f1;
+.customer-item p {
+    margin: 5px 0;
+    font-size: 16px;
 }

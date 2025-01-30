@@ -3,37 +3,35 @@
 {% block title %}Customer List{% endblock %}
 
 {% block content %}
-<div class="form-container">
+<!-- Override the default container -->
+<style>
+    .container {
+        background: none;
+        box-shadow: none;
+        width: auto;
+        padding: 0;
+    }
+</style>
+
+<div class="customer-list-container">
     <h1>Customer List</h1>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Customer ID</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for customer in customers %}
-                <tr>
-                    <td>{{ customer.1|safe }}</td> <!-- First Name -->
-                    <td>{{ customer.2 }}</td> <!-- Last Name -->
-                    <td>{{ customer.3 }}</td> <!-- Customer ID -->
-                    <td>{{ customer.4 }}</td> <!-- Phone Number -->
-                    <td>{{ customer.5 }}</td> <!-- Email -->
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">No customers available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+    <div class="customer-list">
+        {% for customer in customers %}
+        <div class="customer-item">
+            <p><strong>First Name:</strong> {{ customer.1|safe }}</p>
+            <p><strong>Last Name:</strong> {{ customer.2 }}</p>
+            <p><strong>Customer ID:</strong> {{ customer.3 }}</p>
+            <p><strong>Phone Number:</strong> {{ customer.4 }}</p>
+            <p><strong>Email:</strong> {{ customer.5 }}</p>
+        </div>
+        {% empty %}
+        <p>No customers available.</p>
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'user_home' %}" class="btn btn-secondary">Back to User Home</a>
     </div>
 </div>
-
-
 {% endblock %}
