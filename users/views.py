@@ -12,6 +12,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db import connection
 from django.contrib.auth.password_validation import validate_password
+from django.utils.encoding import force_bytes
 
 
 def home(request):
@@ -22,11 +23,11 @@ def forgot_password(request):
         email = request.POST['email']
         try:
             user = User.objects.get(email=email)
-            # יצירת טוקן
+
             token = hashlib.sha1(os.urandom(64)).hexdigest()
             PasswordResetToken.objects.create(user=user, token=token)
 
-            # שליחת מייל
+
             reset_url = request.build_absolute_uri(reverse('reset_password', args=[token]))
             user.email_user(
                 subject="Password Reset",
@@ -58,21 +59,20 @@ def reset_password(request, token):
             messages.error(request, "Passwords do not match.")
             return redirect('reset_password', token=token)
 
-        # בדיקות סיסמה
+
         password_errors = validate_password(password, reset_token.user)
         if password_errors:
             for error in password_errors:
                 messages.error(request, error)
             return redirect('reset_password', token=token)
 
-        # שמירת הסיסמה החדשה
+
         reset_token.user.set_password(password)
         reset_token.user.save()
 
-        # שמירת הסיסמה בהיסטוריה
-        PasswordHistory.objects.create(user=reset_token.user, password=reset_token.user.password)
+        PasswordHistory.objects.create(user=reset_token.user, password=force_bytes(reset_token.user.password))
 
-        # מחיקת הטוקן
+
         reset_token.delete()
 
         messages.success(request, "Your password has been reset successfully.")
@@ -119,7 +119,7 @@ def change_password(request):
 
 @login_required
 def user_home(request):
-    print("Entered user_home view")  # הודעת דיבוג
+    print("Entered user_home view")
     return render(request, 'user_home.html')
 
 
