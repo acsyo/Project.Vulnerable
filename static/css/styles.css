@@ -1,0 +1,156 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #0066cc, #99ccff);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #0066cc;
+}
+
+/* Unified button styles */
+button, a.btn {
+    display: block;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 300px;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover, a.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Error and success messages */
+.message-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+
+
+
+/* Add responsiveness to the table */
+/* Updated form-container */
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ensures responsiveness */
+    max-width: 1200px; /* Allow for larger tables */
+    margin: 20px auto; /* Centered with vertical spacing */
+    overflow: hidden; /* Prevents content from escaping */
+}
+
+/* Updated table-container */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin: 0; /* No extra margin inside the container */
+    width: 100%; /* Ensure the table fits the container */
+}
+
+/* Updated table styling */
+table {
+    width: 100%; /* Table spans full width of container */
+    border-collapse: collapse; /* Cleaner table borders */
+    font-size: 16px; /* Readable font size */
+    text-align: left;
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Add border to cells */
+    padding: 10px; /* Increase padding for readability */
+    word-break: break-word; /* Break long text to prevent overflow */
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}

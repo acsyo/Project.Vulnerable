@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Communication LTD{% endblock %}
+
+{% block content %}
+    <div>
+        <!-- כותרת ראשית -->
+        <h1>Welcome to Communication LTD</h1>
+
+        <!-- כפתור Login -->
+        <a href="{% url 'login' %}" class="btn">Login</a>
+
+        <!-- כפתור Register -->
+        <a href="{% url 'register' %}" class="btn">Register</a>
+    </div>
+{% endblock %}
