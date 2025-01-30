@@ -139,16 +139,23 @@ input {
 }
 
 
+/* Ensure spacing between buttons */
 .button-container {
-    text-align: center; /* Center the content */
+    text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px; /* Add space between buttons */
 }
 
+/* Ensure buttons are properly sized and spaced */
 .button-container .btn {
-    display: block; /* Make the button a block element */
-    margin: 0 auto; /* Ensure it stays centered */
-    width: 200px; /* Make the button a reasonable width */
+    display: block;
+    width: 100%; /* Make buttons full width */
+    max-width: 300px;
+    margin: 0 auto; /* Center buttons */
 }
+
 
 
 .btn-secondary:hover {
@@ -174,4 +181,17 @@ input {
 .customer-item p {
     margin: 5px 0;
     font-size: 16px;
+}
+
+/* ✅ Ensure button in customer list is centered */
+.customer-list-container .button-container {
+    text-align: center; /* Center the button */
+    margin-top: 20px;
+}
+
+/* ✅ Ensure button is centered correctly */
+.customer-list-container .button-container .btn {
+    display: inline-block;
+    margin: 0 auto; /* Center the button */
+    width: 200px; /* Set a fixed width */
 }
