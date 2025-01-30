@@ -1,16 +1,11 @@
 from django import forms
 from .models import Customer
 
-
-from django import forms
-from .models import Customer
-
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['first_name', 'last_name', 'customer_id', 'phone_number', 'email']
 
-    # הסרת הוולידציות כדי להדגים קוד פגיע
 
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField(label="Email")

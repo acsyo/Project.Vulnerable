@@ -1,4 +1,3 @@
-/* Global styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -46,7 +45,6 @@ h1 {
     color: #0066cc;
 }
 
-/* Unified button styles */
 button, a.btn {
     display: block;
     padding: 15px 20px;
@@ -70,7 +68,6 @@ button:hover, a.btn:hover {
     transform: scale(1.05);
 }
 
-/* Form styles */
 .form-container {
     background: white;
     padding: 20px;
@@ -101,7 +98,6 @@ input {
     font-size: 14px;
 }
 
-/* Error and success messages */
 .message-container {
     margin: 20px auto;
     width: 90%;
@@ -133,36 +129,32 @@ input {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     width: 95%;
-    max-width: 900px; /* Bigger width only for customer list */
-    margin: 70px auto 20px auto; /* Reduce top margin so it aligns */
+    max-width: 900px;
+    margin: 5px auto 20px auto;
     color: #333;
 }
 
 
-/* Ensure spacing between buttons */
 .button-container {
     text-align: center;
     margin-top: 20px;
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 15px; /* Add space between buttons */
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* Ensure buttons are properly sized and spaced */
 .button-container .btn {
     display: block;
-    width: 100%; /* Make buttons full width */
+    width: 100%;
     max-width: 300px;
-    margin: 0 auto; /* Center buttons */
+    margin: 0 auto;
 }
-
 
 
 .btn-secondary:hover {
     background-color: #0056b3;
 }
 
-/* ✅ Customer List Styling (No Table) */
 .customer-list {
     display: flex;
     flex-direction: column;
@@ -183,15 +175,14 @@ input {
     font-size: 16px;
 }
 
-/* ✅ Ensure button in customer list is centered */
 .customer-list-container .button-container {
-    text-align: center; /* Center the button */
+    text-align: center;
     margin-top: 20px;
 }
 
-/* ✅ Ensure button is centered correctly */
+
 .customer-list-container .button-container .btn {
     display: inline-block;
-    margin: 0 auto; /* Center the button */
-    width: 200px; /* Set a fixed width */
+    margin: 0 auto;
+    width: 200px;
 }

@@ -9,7 +9,7 @@ PASSWORD_CONFIG = {
     'history_limit': 3,
     'dictionary_check': True,
     'max_login_attempts': 3,
-    'lock_duration_minutes': 10  # זמן נעילה לאחר כשלונות
+    'lock_duration_minutes': 10
 }
 
 

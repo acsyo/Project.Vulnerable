@@ -17,7 +17,7 @@ def check_password(raw_password, stored_password):
 
 
 def is_password_unique(user, new_password):
-    from users.models import PasswordHistory # מבצעים את הייבוא רק כשצריך, במקום בהתחלה שלא יהיה יבוא מעגלי
+    from users.models import PasswordHistory
 
     history = PasswordHistory.objects.filter(user=user).order_by('-created_at')[:PASSWORD_CONFIG['history_limit']]
     for record in history:

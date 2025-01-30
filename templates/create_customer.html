@@ -33,14 +33,13 @@
 
     {% if customer %}
         <h2>Customer Created:</h2>
-        <p>First Name: {{ customer.first_name|safe }}</p> <!-- פגיע ל-XSS -->
+        <p>First Name: {{ customer.first_name|safe }}</p>
         <p>Last Name: {{ customer.last_name }}</p>
         <p>Customer ID: {{ customer.customer_id }}</p>
         <p>Phone: {{ customer.phone_number }}</p>
         <p>Email: {{ customer.email }}</p>
     {% endif %}
 
-    <!-- כפתור חזרה לדף הבית של המשתמש -->
     <div class="button-container">
         <a href="{% url 'user_home' %}" class="btn btn-secondary">Back to User Home</a>
     </div>

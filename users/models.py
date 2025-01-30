@@ -1,5 +1,3 @@
-# users/models.py
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from utils.password_utils import hash_password, check_password
@@ -16,7 +14,7 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('The Email field must be set')
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  # שימוש בפונקציה להגדיר סיסמה
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -27,9 +25,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    username = models.CharField(max_length=150, unique=True)  # ייחודי
-    email = models.EmailField(unique=True)  # ייחודי
-    password = models.CharField(max_length=128)  # שמירת סיסמה כטקסט גלוי
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -37,21 +35,16 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'username'  # השדה הראשי הוא username
-    REQUIRED_FIELDS = ['email']  # להשאיר email כשדה חובה
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     def set_password(self, raw_password):
-        # שמירת הסיסמה ללא הצפנה
         self.password = raw_password
 
     def check_password(self, raw_password):
-        # השוואה פשוטה בין סיסמה גולמית לסיסמה שנשמרה
         return self.password == raw_password
 
     def email_user(self, subject, message, from_email=None, **kwargs):
-        """
-        שולח אימייל למשתמש זה.
-        """
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
@@ -59,7 +52,7 @@ class User(AbstractBaseUser):
 
 class PasswordHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    password = models.BinaryField()  # לאחסן את הסיסמה המוצפנת
+    password = models.BinaryField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -78,7 +71,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     customer_id = models.CharField(max_length=25)
-    phone_number = models.CharField(max_length=15)  # אם צריך להכליל קידומת
+    phone_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
 
     def __str__(self):
@@ -87,11 +80,10 @@ class Customer(models.Model):
 
 class PasswordResetToken(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    token = models.CharField(max_length=40, unique=True)  # מתאים ל-SHA-1
+    token = models.CharField(max_length=40, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def is_valid(self):
-        # בדיקה אם הטוקן בתוקף (1 שעה לדוגמה)
         return now() < self.created_at + timedelta(hours=1)
 
     @staticmethod

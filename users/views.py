@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from .models import PasswordResetToken, User
 from utils.password_utils import validate_password, hash_password
 from django.urls import reverse
@@ -86,28 +87,28 @@ def change_password(request):
         new_password = request.POST['new_password']
         confirm_password = request.POST['confirm_password']
 
-        # בדיקת סיסמה נוכחית
+
         if not request.user.check_password(current_password):
             messages.error(request, "The current password is incorrect.")
             return redirect('change_password')
 
-        # בדיקת התאמת סיסמאות
+
         if new_password != confirm_password:
             messages.error(request, "New passwords do not match.")
             return redirect('change_password')
 
-        # בדיקת הסיסמה החדשה לפי כל הדרישות (כולל היסטוריה)
+
         password_errors = validate_password(new_password, user=request.user)
         if password_errors:
             for error in password_errors:
                 messages.error(request, error)
             return redirect('change_password')
 
-        # שמירת הסיסמה החדשה
+
         request.user.set_password(new_password)
         request.user.save()
 
-        # עדכון היסטוריית סיסמאות
+
         from users.models import PasswordHistory
         PasswordHistory.objects.create(user=request.user, password=hash_password(new_password))
 
@@ -137,10 +138,9 @@ def login_user(request):
             user_data = cursor.fetchone()
 
         if user_data:
-            # יצירת אובייקט משתמש חוקי והתחברות למערכת
-            user = User.objects.get(id=user_data[0])  # איתור המשתמש לפי ID
-            user.backend = 'django.contrib.auth.backends.ModelBackend'  # הגדרת backend
-            login(request, user)  # התחברות המשתמש
+            user = User.objects.get(id=user_data[0])
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, user)
 
             messages.success(request, "Logged in successfully.")
             return redirect('user_home')
@@ -160,16 +160,16 @@ def register(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
-        # Check if passwords match
+
         if password != confirm_password:
             messages.error(request, "Passwords do not match")
             return redirect('register')
 
-        # Check password validity
-        password_errors = validate_password(password)
-        if password_errors:
-            for error in password_errors:
-                 messages.error(request, error)
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            for error in e.messages:
+                messages.error(request, error)
             return redirect('register')
 
         # Vulnerable SQL query to check if the username or email exists
@@ -182,7 +182,7 @@ def register(request):
                 messages.error(request, "Error checking existing users.")
                 return redirect('register')
 
-        # Check if any records were fetched
+
         if existing_users:
             messages.error(request, f"Username {existing_users[0][0]} is already taken.")
             return redirect('register')
@@ -205,7 +205,7 @@ def create_customer(request):
 
     #SQLi payload:
     #  sqli version: test' || (SELECT sqlite_version()) || '--
-    #  all table names: test' || (SELECT group_concat(sql) FROM sqlite_master WHERE name='users_customer') || '--
+    #  all table names: test' || (SELECT group_concat(name) FROM sqlite_master WHERE type='table') || (SELECT hex(randomblob(4))) || '@example.com' || '--
 
     #Stored XSS payload: <script>alert("XSS Attack!");</script>
 
@@ -217,7 +217,7 @@ def create_customer(request):
         phone_number = request.POST.get('phone_number', '')
         email = request.POST.get('email', '')
 
-        # **Vulnerable SQL query with direct user input**
+        # Vulnerable SQL query with direct user input
         insert_query = f"""
             INSERT INTO users_customer (first_name, last_name, customer_id, phone_number, email)
             VALUES ('{first_name}', '{last_name}', '{customer_id}', '{phone_number}', '{email}')
