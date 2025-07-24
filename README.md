@@ -1,4 +1,13 @@
-# Vulnerabilities in Communication LTD Project - vulnerable version
+# Vulnerable Web Application Demo
+
+This is a purposely vulnerable web project built for educational and testing purposes only.  
+It demonstrates common web security issues including:
+
+- SQL Injection (SQLi)
+- Cross-Site Scripting (XSS)
+- Unvalidated input handling
+
+## Included Vulnerabilities
 
 ## 1) SQL Injection in Login Function
 
